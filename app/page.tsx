@@ -194,19 +194,15 @@ export default function WeddingInvitation() {
    
   <div className="absolute inset-0 bg-[#480908]" />
 
-  <motion.div
+  <div
     className="relative z-10 w-full"
-    initial={{ y: 45, opacity: 0 }}
-    whileInView={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-    viewport={{ once: true, amount: 0.35 }}
     style={isArabic ? { fontFamily: arabicFontFamily } : undefined}
   >
     <CountdownTimer
       targetDate="2026-06-13T20:00:00"
       language={language}
     />
-  </motion.div>
+  </div>
 </section>
 
          {/* PAGE 3: Details with Video Background */}
@@ -217,28 +213,20 @@ export default function WeddingInvitation() {
 >
   <div className="absolute inset-0 bg-[#480908]" />
 
-  <motion.div
+  <div
     className="relative z-10 w-full"
-    initial={{ y: 45, opacity: 0 }}
-    whileInView={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-    viewport={{ once: true, amount: 0.35 }}
     style={isArabic ? { fontFamily: arabicFontFamily } : undefined}
   >
     <WeddingDetails language={language} />
-  </motion.div>
+  </div>
 </section>
 
 {/* PAGE 4: Save the Date */}
 <section className="relative overflow-hidden bg-[#480908] px-4 pt-10 pb-10">
   <div className="absolute inset-0 bg-[#480908]" />
 
-  <motion.div
+  <div
     className="relative z-10 flex flex-col items-center"
-    initial={{ y: 45, opacity: 0 }}
-    whileInView={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-    viewport={{ once: true, amount: 0.35 }}
   >
     <Image
       src="/images/save-date-bg.png"
@@ -265,7 +253,7 @@ export default function WeddingInvitation() {
         We can't wait to celebrate with you
       </p>
     </div>
-  </motion.div>
+  </div>
 </section>
         </motion.div>
         </>
