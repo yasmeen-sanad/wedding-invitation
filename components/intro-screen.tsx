@@ -248,37 +248,27 @@ export function IntroScreen({ onOpen, language }: IntroScreenProps) {
         }}
       />
 
-      {/* heart seal */}
-      {!isPressed && (
-        <motion.button
-          type="button"
-          onClick={handleClick}
-          className="absolute left-1/2 top-[48%] z-50 -translate-x-1/2 -translate-y-1/2 border-none bg-transparent p-0 outline-none"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: [1, 1.025, 1], y: 0 }}
-          transition={{
-            opacity: { delay: 0.35, duration: 0.8 },
-            scale: {
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-          }}
-          style={{ width: "min(50vw, 14rem)" }}
-        >
-          <Image
-            src="/images/heart-invitation.png"
-            alt="Wedding Invitation"
-            width={1024}
-            height={1024}
-            className="h-auto w-full"
-            priority
-            style={{
-              filter: "drop-shadow(0 22px 45px rgba(0,0,0,0.55))",
-            }}
-          />
-        </motion.button>
-      )}
+     {/* heart seal */}
+{!isPressed && (
+  <motion.button
+    type="button"
+    onClick={handleClick}
+    className="absolute left-1/2 top-[48%] z-50 -translate-x-1/2 -translate-y-1/2 border-none bg-transparent p-0 outline-none"
+    initial={{ opacity: 1 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0 }}
+    style={{ width: "min(50vw, 14rem)" }}
+  >
+    <Image
+      src="/images/heart-invitation.png"
+      alt="Wedding Invitation"
+      width={1024}
+      height={1024}
+      className="h-auto w-full"
+      priority
+    />
+  </motion.button>
+)}
     </motion.div>
   )
 }

@@ -115,8 +115,8 @@ export function WeddingDetails({ language = "en" }: WeddingDetailsProps) {
       className="absolute top-[27%] left-[13%] text-left text-[#F3E5D7]"
       style={{ fontFamily: scriptFont }}
     >
-      <p className="text-[10px] leading-none">8:30 PM</p>
-      <p className="mt-1 text-[20px] leading-none">Guest Arrival</p>
+      <p className="text-[10px] leading-none">{timelineItems[0].time}</p>
+      <p className="mt-1 text-[14px] leading-none">{timelineItems[0].label}</p>
     </div>
 
     <div className="absolute left-1/2 top-[31.8%] flex h-[46px] w-[46px] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
@@ -128,8 +128,8 @@ export function WeddingDetails({ language = "en" }: WeddingDetailsProps) {
       className="absolute top-[47.5%] right-[17%] text-left text-[#F3E5D7]"
       style={{ fontFamily: scriptFont }}
     >
-      <p className="text-[10px] leading-none">10:30 PM</p>
-      <p className="mt-1 text-[20px] leading-none">Zaffah</p>
+      <p className="text-[10px] leading-none">{timelineItems[1].time}</p>
+      <p className="mt-1 text-[16px] leading-none">{timelineItems[1].label}</p>
     </div>
 
     <div className="absolute left-1/2 top-[52.5%] flex h-[46px] w-[46px] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
@@ -141,8 +141,8 @@ export function WeddingDetails({ language = "en" }: WeddingDetailsProps) {
       className="absolute top-[66.5%] left-[17%] text-left text-[#F3E5D7]"
       style={{ fontFamily: scriptFont }}
     >
-      <p className="text-[10px] leading-none">12:00 AM</p>
-      <p className="mt-1 text-[20px] leading-none">Dinner</p>
+      <p className="text-[10px] leading-none">{timelineItems[2].time}</p>
+      <p className="mt-1 text-[16px] leading-none">{timelineItems[2].label}</p>
     </div>
 
     <div className="absolute left-1/2 top-[72.8%] flex h-[46px] w-[46px] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
@@ -341,7 +341,7 @@ export function WeddingDetails({ language = "en" }: WeddingDetailsProps) {
           className="relative z-20 mb-6"
         >
           <a
-            href="https://maps.app.goo.gl/da6qRz5RwazrJzY79?g_st=iw"
+            href="https://maps.app.goo.gl/6yf1VSgt8r3faaNt7?g_st=iw"
             target="_blank"
             rel="noopener noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-full py-4 font-medium text-white transition-transform hover:scale-[1.02] active:scale-[0.98]"
