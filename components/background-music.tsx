@@ -8,7 +8,7 @@ let globalAudio: HTMLAudioElement | null = null
 export function BackgroundMusic() {
   useEffect(() => {
     if (!globalAudio) {
-      globalAudio = new Audio("/music/wedding-background.mp4")
+      globalAudio = new Audio("/music/vvv.mp4")
       globalAudio.loop = true
       globalAudio.preload = "metadata"
     }

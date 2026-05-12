@@ -64,7 +64,7 @@ export function AudioPlayer() {
       <motion.button
         type="button"
         onClick={toggle}
-        className="fixed right-4 top-16 z-70 rounded-full border border-white/55 bg-white/65 px-3 py-1.5 text-xs text-[#7e6e62] shadow-sm backdrop-blur-md transition hover:bg-white/80"
+        className="fixed right-4 top-16 z-70 rounded-full border border-white/55 bg-white/65 px-3 py-1.5 text-xs text-[#F3E5D7] shadow-sm backdrop-blur-md transition hover:bg-white/80"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2 }}

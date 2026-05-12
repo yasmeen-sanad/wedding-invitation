@@ -139,19 +139,7 @@
   }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--pink);
-  border-radius: 3px;
-}
 
 /* Smooth scroll */
 html {

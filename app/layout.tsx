@@ -24,7 +24,7 @@ const amiri = Amiri({
 export const metadata: Metadata = {
   metadataBase: new URL("https://weaam-waleed.vercel.app"),
   title: "Weaam & Waleed - Wedding Invitation",
-  description: "You are cordially invited to celebrate our engagement - April 29, 2026",
+  description: "You are cordially invited to celebrate our engagement - June 13, 2026",
   generator: "v0.app",
 
   icons: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "Weaam & Waleed - Wedding Invitation",
-    description: "You are cordially invited to celebrate our engagement - April 29, 2026",
+    description: "You are cordially invited to celebrate our engagement - June 13, 2026",
     url: "https://weaam-waleed.vercel.app",
     siteName: "Weaam & Waleed",
     images: [
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Weaam & Waleed - Wedding Invitation",
-    description: "You are cordially invited to celebrate our engagement - April 29, 2026",
+    description: "You are cordially invited to celebrate our engagement - June 13, 2026",
     images: ["/images/ww-logo.png"], // ← نفس الصورة
   },
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import { Sparkles } from "@/components/WeddingInvitation"
 
 interface CountdownTimerProps {
   targetDate: string
@@ -50,21 +51,21 @@ export function CountdownTimer({ targetDate, language = "en" }: CountdownTimerPr
 
   return (
     <section
-      className="relative px-4 pt-20 pb-6"
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(248,242,238,0.82) 0%, rgba(242,236,230,0.88) 55%, rgba(250,246,242,0.55) 100%)",
-      }}
+      className="relative px-4 pt-20 pb-6 overflow-hidden"
+      style={{ background: "#480908" }}
     >
-      <div className="max-w-sm mx-auto" style={isArabic ? { fontFamily: arabicFontFamily } : undefined}>
+      {/* Sparkles behind content */}
+      <Sparkles />
+      
+      <div className="relative z-10 max-w-sm mx-auto" style={isArabic ? { fontFamily: arabicFontFamily } : undefined}>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-10">
-          <h2 className="text-4xl text-[#6b5248] mb-2"
+          <h2 className="text-4xl text-[#F3E5D7] mb-2"
             style={{
               fontFamily: isArabic ? arabicFontFamily : "var(--font-script), 'Great Vibes', cursive",
             }}>{isArabic ? "العد التنازلي" : "Countdown"}</h2>
-          <p className="text-sm text-[#9e8e82]">{isArabic ? "حتى نلتقي في يومنا السعيد" : "Until we meet on our special day"}</p>
+          <p className="text-sm text-[#F3E5D7]">{isArabic ? "حتى نلتقي في يومنا السعيد" : "Until we meet on our special day"}</p>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }}
@@ -75,24 +76,24 @@ export function CountdownTimer({ targetDate, language = "en" }: CountdownTimerPr
               transition={{ delay: 0.1 + i * 0.08 }} viewport={{ once: true }}
               className="flex flex-col items-center py-5 rounded-2xl"
               style={{
-                background: "rgba(255,252,250,0.92)",
+                background: "rgba(72, 9, 8, 0.72)",
                 border: `1px solid ${u.accent}55`,
                 boxShadow: `0 4px 20px -6px ${u.accent}60`,
                 backdropFilter: "blur(10px)",
               }}>
               {/* Accent dot */}
               <div className="w-2 h-2 rounded-full mb-3" style={{ background: u.accent, opacity: 0.8 }} />
-              <p className="text-3xl md:text-4xl font-light text-[#6b5248] tabular-nums leading-none mb-2">
+              <p className="text-3xl md:text-4xl font-light text-[#F3E5D7] tabular-nums leading-none mb-2">
                 {String(u.value).padStart(2, "0")}
               </p>
-              <p className="text-[9px] text-[#9e8e82]">{u.label}</p>
+              <p className="text-[9px] text-[#F3E5D7]">{u.label}</p>
             </motion.div>
           ))}
         </motion.div>
 
         <div className="mt-8 flex justify-center">
           <svg width="100" height="22" viewBox="0 0 110 28" fill="none" className="opacity-70">
-            <path d="M5,14 Q20,4 38,14 Q55,24 72,14 Q90,4 105,14" stroke="#e0c8b8" strokeWidth="1.25" fill="none" />
+            <path d="M5,14 Q20,4 38,14 Q55,24 72,14 Q90,4 105,14" stroke="#F3E5D7" strokeWidth="1.25" fill="none" />
             <circle cx="55" cy="14" r="3.5" fill="#b4c8dc" opacity="0.65" />
             <circle cx="38" cy="14" r="2" fill="#f2b4b4" opacity="0.55" />
             <circle cx="72" cy="14" r="2" fill="#b5d1b5" opacity="0.55" />

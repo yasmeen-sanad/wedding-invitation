@@ -1,7 +1,9 @@
+
+
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { playBackgroundMusic } from "@/components/background-music"
 
@@ -10,195 +12,273 @@ interface IntroScreenProps {
   language: "en" | "ar"
 }
 
-const CASTLE_ENTRANCE_MS = 1400
-const HOLD_BEFORE_CONTENT_MS = 250
-
 export function IntroScreen({ onOpen, language }: IntroScreenProps) {
   const [isPressed, setIsPressed] = useState(false)
+
   const isArabic = language === "ar"
   const arabicFontFamily = "var(--font-arabic), ui-sans-serif, system-ui"
+  const scriptFont = 'var(--font-script), "Great Vibes", cursive'
 
-  
+  const copy = isArabic
+    ? {
+       
+        byWillOfGod: "وذلك بمشيئة الله",
+        invitationDate: "٢٩ أبريل",
+      }
+    : {
+        byWillOfGod: "By the will of God",
+        invitationDate: "April 29",
+      }
+
   const handleClick = () => {
     if (isPressed) return
     setIsPressed(true)
-    // Play music when logo is clicked
     playBackgroundMusic()
-    setTimeout(() => onOpen(), CASTLE_ENTRANCE_MS + HOLD_BEFORE_CONTENT_MS)
+  }
+
+  const handleScrollDown = () => {
+    onOpen()
   }
 
   return (
-    <AnimatePresence mode="wait">
-      {!isPressed ? (
-          <motion.div
-            key="tap"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
-          style={{
-            ...(isArabic ? { fontFamily: arabicFontFamily } : null),
-            // Watercolor palette: warm cream → blush rose → sage green mist
-            background:
-              "linear-gradient(180deg, #fdf8f4 0%, #f8ede4 30%, #eee8e0 60%, #e8eeea 100%)",
+    <motion.div
+      key="intro-envelope"
+      className="fixed inset-0 z-50 overflow-hidden"
+      style={{
+        ...(isArabic ? { fontFamily: arabicFontFamily } : null),
+        background:
+          "radial-gradient(circle at 50% 38%, #8a2f35 0%, #5b171d 46%, #2a0508 100%)",
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div
+        className="absolute inset-0 opacity-[0.16]"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
+
+      {/* PAGE COMING OUT OF ENVELOPE */}
+      <motion.div
+        className="absolute inset-0 z-[5] overflow-hidden"
+        initial={false}
+        animate={
+          isPressed
+            ? { scale: 1, y: 0, opacity: 1 }
+            : { scale: 0.38, y: "62%", opacity: 0 }
+        }
+        transition={{
+          duration: 3,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        style={{ transformOrigin: "center bottom" }}
+      >
+        <motion.div
+          className="relative h-full w-full"
+          animate={
+            isPressed
+              ? { scale: 1, filter: "blur(0px)" }
+              : { scale: 1.08, filter: "blur(8px)" }
+          }
+          transition={{
+            duration: 2.4,
+            ease: [0.22, 1, 0.36, 1],
           }}
         >
-          {/* Soft warm glow behind logo */}
-          <motion.div
-            aria-hidden
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.4 }}
+          <video
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            loop
+            className="absolute inset-0 h-full w-full object-cover"
           >
-            <div
-              className="absolute left-1/2 top-[42%] h-112 w-md -translate-x-1/2 rounded-full"
-              style={{
-                background: "radial-gradient(circle, rgba(240,224,210,0.55) 0%, transparent 70%)",
-                filter: "blur(48px)",
-              }}
-            />
-          </motion.div>
+            <source src="/videos/first.mp4" type="video/mp4" />
+          </video>
 
-          {/* Watercolor accent dots — top corners */}
-          <motion.div
-            className="absolute top-8 left-8 flex gap-2"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-          >
-            {["#f2b4b4", "#b5d1b5", "#b4c8dc"].map((c, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ background: c, opacity: 0.65 }} />
-            ))}
-          </motion.div>
-          <motion.div
-            className="absolute top-8 right-8 flex gap-2"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ delay: 0.65, duration: 0.8 }}
-          >
-            {["#b4c8dc", "#b5d1b5", "#f2b4b4"].map((c, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ background: c, opacity: 0.65 }} />
-            ))}
-          </motion.div>
+          <div className="absolute inset-0 bg-[#2a0508]/20" />
 
-          {/* Tap to open — above logo (static, no pulse) */}
-          <p className="relative z-10 mb-8 text-center text-[15px] text-[#a09080]">
-            {isArabic ? "اضغط للدخول" : "TAP TO OPEN"}
-          </p>
+         <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-8 pt-18">
+  <motion.div
+    className="mx-auto flex w-full max-w-[320px] flex-col items-center justify-center text-center"
+    initial={{ opacity: 0, y: 34 }}
+    animate={isPressed ? { opacity: 1, y: 0 } : {}}
+    transition={{
+      delay: 1.35,
+      duration: 1,
+      ease: "easeOut",
+    }}
+  >
+    <h1
+  className="text-center text-[34px] leading-none tracking-[0.02em] text-[#F6EBDD] drop-shadow-[0_2px_10px_rgba(255,240,220,0.18)]"
+  style={{ fontFamily: scriptFont }}
+>
+  Waleed
+</h1>
 
-          {/* Logo */}
-          <motion.div
-            initial={{ y: 24, opacity: 0, scale: 0.94 }}
-            animate={{ 
-              y: 0, 
-              opacity: 1, 
-              scale: [1, 1.02, 1],
-              filter: ["brightness(1)", "brightness(1.1)", "brightness(1)"]
-            }}
-            transition={{ 
-              delay: 0.1, 
-              duration: 0.9, 
-              ease: [0.22, 1, 0.36, 1],
-              scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-              filter: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="relative z-10 cursor-pointer"
-            onClick={handleClick}
-          >
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.985 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-              className="relative aspect-square w-[min(85vw,18rem)] md:w-80 shrink-0 overflow-hidden rounded-full"
-              style={{
-                
-              }}
-            >
-              <Image
-                src="/images/ww-logo.png"
-                alt="W&W Wedding"
-                width={1024}
-                height={1024}
-                className="h-full w-full object-cover"
-                priority
-              />
-            </motion.div>
-          </motion.div>
+<p
+  className="my-2 text-center text-[18px] text-[#F3E5D7]"
+  style={{ fontFamily: scriptFont }}
+>
+  &
+</p>
 
-          {/* Invitation label */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.65, ease: "easeOut" }}
-            className="relative z-10 mt-5 text-center"
-          >
-            <p className="text-[16px] text-[#9e8e82]">
-              {isArabic ? "دعوة لحفل عقد قران" : "Engagement Invitation"}
-            </p>
-          </motion.div>
+<h1
+  className="text-center text-[34px] leading-none tracking-[0.02em] text-[#F6EBDD] drop-shadow-[0_2px_10px_rgba(255,240,220,0.18)]"
+  style={{ fontFamily: scriptFont }}
+>
+  Weaam
+</h1>
 
-          {/* Flourish divider */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0.6 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ delay: 0.7, duration: 0.7, ease: "easeOut" }}
-            className="relative z-10 mt-4"
-          >
-            <svg width="80" height="16" viewBox="0 0 80 16" fill="none">
-              <path d="M4,8 Q20,2 40,8 Q60,14 76,8" stroke="#dcc4b4" strokeWidth="1.2" fill="none" />
-              <circle cx="40" cy="8" r="2.5" fill="#f2b4b4" opacity="0.7" />
-            </svg>
-          </motion.div>
+    <p
+      className="mt-5 text-center text-[18px] tracking-[0.18em] text-[#F3E5D7]"
+      style={{ fontFamily: scriptFont }}
+    >
+      Wedding Invitation
+    </p>
+
+    <p
+      className="mt-7 text-center text-[18px] tracking-[0.08em] text-[#F6EBDD] drop-shadow-[0_2px_10px_rgba(255,240,220,0.18)]"
+      style={{ fontFamily: scriptFont }}
+    >
+      13 / 6
+    </p>
+  </motion.div>
+</div>
+
+{isPressed && (
+  <motion.button
+    type="button"
+    onClick={handleScrollDown}
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{
+      delay: 2,
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+    className="absolute bottom-45 left-1/2 z-[90] flex -translate-x-1/2 items-center justify-center"
+  >
+    <div className="flex items-center justify-center rounded-full border border-[#F6EBDD]/30 bg-[rgba(90,10,10,0.38)] px-4 py-[3px] backdrop-blur-sm">
+      <span
+        className="text-center text-[9px] font-medium uppercase tracking-[0.24em] text-[#F6EBDD]"
+        style={{
+          lineHeight: 1,
+        }}
+      >
+        View Details
+      </span>
+    </div>
+  </motion.button>
+)}
         </motion.div>
-      ) : (
-        <motion.div
-          key="castle"
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 overflow-hidden"
-          // Warm cream base — matches intro bg bottom color
-          style={{ background: "#e8eeea" }}
+      </motion.div>
+
+      {/* top flap */}
+      <motion.div
+        className="absolute left-0 top-0 z-30 h-[56%] w-full pointer-events-none"
+        animate={
+          isPressed
+            ? { y: "-70%", rotateX: 62, opacity: 0.9 }
+            : { y: 0, rotateX: 0, opacity: 1 }
+        }
+        transition={{ duration: 1.7, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          clipPath: "polygon(0 0, 100% 0, 50% 100%)",
+          background:
+            "linear-gradient(180deg, #8a3037 0%, #681d24 52%, #4c1016 100%)",
+          transformOrigin: "top center",
+          boxShadow: "0 30px 70px rgba(0,0,0,0.42)",
+        }}
+      />
+
+      {/* left flap */}
+      <motion.div
+        className="absolute left-0 bottom-0 z-20 h-[72%] w-[62%] pointer-events-none"
+        animate={
+          isPressed
+            ? { x: "-72%", rotate: -5, opacity: 0.88 }
+            : { x: 0, rotate: 0, opacity: 1 }
+        }
+        transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          clipPath: "polygon(0 0, 100% 58%, 0 100%)",
+          background:
+            "linear-gradient(135deg, #7e2930 0%, #54141a 58%, #31070b 100%)",
+          boxShadow: "18px 0 45px rgba(0,0,0,0.28)",
+        }}
+      />
+
+      {/* right flap */}
+      <motion.div
+        className="absolute right-0 bottom-0 z-20 h-[72%] w-[62%] pointer-events-none"
+        animate={
+          isPressed
+            ? { x: "72%", rotate: 5, opacity: 0.88 }
+            : { x: 0, rotate: 0, opacity: 1 }
+        }
+        transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          clipPath: "polygon(100% 0, 0 58%, 100% 100%)",
+          background:
+            "linear-gradient(225deg, #7e2930 0%, #58171d 55%, #30070b 100%)",
+          boxShadow: "-18px 0 45px rgba(0,0,0,0.28)",
+        }}
+      />
+
+      {/* bottom front flap */}
+      <motion.div
+        className="absolute left-0 bottom-0 z-40 h-[56%] w-full pointer-events-none"
+        animate={
+          isPressed
+            ? { y: "72%", opacity: 0.86 }
+            : { y: 0, opacity: 1 }
+        }
+        transition={{ duration: 1.75, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          clipPath: "polygon(0 100%, 50% 0, 100% 100%)",
+          background:
+            "linear-gradient(180deg, #842a31 0%, #651b22 48%, #3b090d 100%)",
+          boxShadow: "0 -24px 60px rgba(0,0,0,0.38)",
+        }}
+      />
+
+      {/* heart seal */}
+      {!isPressed && (
+        <motion.button
+          type="button"
+          onClick={handleClick}
+          className="absolute left-1/2 top-[48%] z-50 -translate-x-1/2 -translate-y-1/2 border-none bg-transparent p-0 outline-none"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: [1, 1.025, 1], y: 0 }}
+          transition={{
+            opacity: { delay: 0.35, duration: 0.8 },
+            scale: {
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+          style={{ width: "min(50vw, 14rem)" }}
         >
-          {/* Castle image — fades in with gentle zoom-out */}
-          <motion.div
-            className="absolute inset-0"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              opacity: { duration: 1.05, ease: [0.4, 0, 0.2, 1] },
-              scale:   { duration: 1.65, ease: [0.22, 1, 0.36, 1] },
+          <Image
+            src="/images/heart-invitation.png"
+            alt="Wedding Invitation"
+            width={1024}
+            height={1024}
+            className="h-auto w-full"
+            priority
+            style={{
+              filter: "drop-shadow(0 22px 45px rgba(0,0,0,0.55))",
             }}
-          >
-            <Image
-              src="/images/chateau.jpg"
-              alt="Venue"
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
-          </motion.div>
-
-          {/* Warm cream flash — bridges intro → castle without dark flash */}
-          <motion.div
-            className="absolute inset-0"
-            style={{ background: "#fdf8f4" }}
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.4, 0, 1, 1] }}
           />
-
-          {/* Soft vignette fades in after flash clears */}
-          <motion.div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(180deg, rgba(248,240,232,0.12) 0%, transparent 40%, rgba(232,240,236,0.18) 100%)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.9, ease: "easeOut" }}
-          />
-        </motion.div>
+        </motion.button>
       )}
-    </AnimatePresence>
+    </motion.div>
   )
 }

@@ -92,7 +92,7 @@ export function WeddingDetails({ language = "en" }: WeddingDetailsProps) {
             </div>
             <div className="flex items-center gap-3 text-[#7a6a60]">
               <Calendar className="w-4 h-4 shrink-0" style={{ color: "#a0b888" }} />
-              <span className="text-sm">{isArabic ? "Wednesday, 29.4.2026" : "Wednesday, 29.4.2026"}</span>
+              <span className="text-sm">{isArabic ? "Saturday, 13.6.2026" : "Saturday, 13.6.2026"}</span>
             </div>
             <div className="flex items-center gap-3 text-[#7a6a60]">
               <Clock className="w-4 h-4 shrink-0" style={{ color: "#88aac0" }} />
