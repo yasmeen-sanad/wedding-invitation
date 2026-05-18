@@ -38,6 +38,10 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   
+  --wedding-bg: #570f07;
+  --wedding-bg-card: rgba(87, 15, 7, 0.72);
+  --wedding-shadow: 0 8px 32px -8px rgba(87, 15, 7, 0.16);
+
   /* Fairytale Colors */
   --pink: oklch(0.85 0.12 350);
   --blue: oklch(0.8 0.1 220);

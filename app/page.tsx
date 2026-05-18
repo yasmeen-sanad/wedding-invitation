@@ -8,10 +8,11 @@ import Image from "next/image"
 import { IntroScreen } from "@/components/intro-screen"
 import { CountdownTimer } from "@/components/countdown-timer"
 import { WeddingDetails } from "@/components/wedding-details"
+import { weddingColors } from "@/lib/wedding-colors"
 
 export default function WeddingInvitation() {
   const [isOpen, setIsOpen] = useState(false)
-  const [language, setLanguage] = useState<"en" | "ar">("en")
+  const [language, setLanguage] = useState<"en" | "ar">("ar")
 
   const detailsRef = useRef<HTMLDivElement | null>(null)
 
@@ -21,8 +22,11 @@ export default function WeddingInvitation() {
 
   const copy = isArabic
     ? {
-        together:
-          "بصادق الود والمحبة تتشرف السيدة /منال علي و السيدة / نورية علي بدعوتكم لحضور حفل عقد قران",
+      together: [
+        "في ليلةٍ مكبر غلاها فيها الفرح معقود",
+       "تتشرف السيدة / منال علي والسيدة / نورية علي",
+        "بدعوتكم لحضور لزفاف نجلينا",
+      ],
         byWillOfGod: "وذلك بمشيئة الله",
         venue: "الموقع",
         invitationDate: "١٣ يونيو",
@@ -53,7 +57,9 @@ export default function WeddingInvitation() {
   }
 
   return (
-    <main className="relative min-h-screen scroll-smooth overflow-x-hidden bg-[#4A1016]">
+    <main
+      className="relative min-h-screen scroll-smooth overflow-x-hidden bg-[#570f07]"
+    >
   <AnimatePresence mode="sync">
   {!isOpen && (
     <IntroScreen
@@ -83,7 +89,7 @@ export default function WeddingInvitation() {
             <button
               type="button"
               onClick={() => setLanguage(isArabic ? "en" : "ar")}
-              className="rounded-full border border-white/55 bg-[#4A1016]/80 px-4 py-1.5 text-xs text-[#F3E5D7] shadow-sm backdrop-blur-md transition hover:bg-[#4A1016]/90"
+              className="rounded-full border border-white/55 bg-[#570f07]/80 px-4 py-1.5 text-xs text-[#F3E5D7] shadow-sm backdrop-blur-md transition hover:bg-[#570f07]/90"
               style={isArabic ? { fontFamily: arabicFontFamily } : undefined}
             >
               {isArabic ? "ENGLISH" : "العربية"}
@@ -91,7 +97,7 @@ export default function WeddingInvitation() {
           </motion.div>
 
           {/* PAGE 1: Invitation with Video */}
-          <section className="relative flex min-h-[110vh] flex-col items-center justify-center overflow-hidden px-4">
+          <section className="relative flex min-h-[110vh] flex-col items-center justify-center overflow-hidden bg-[#570f07] px-4">
             <video
               autoPlay
               muted
@@ -100,7 +106,7 @@ export default function WeddingInvitation() {
               loop
               className="absolute inset-0 h-full w-full object-cover md:object-cover object-center"
             >
-              <source src="/videos/third.mp4" type="video/mp4" />
+              <source src="/videos/first.mp4" type="video/mp4" />
             </video>
 
             <div className="absolute inset-0 " />
@@ -113,17 +119,22 @@ export default function WeddingInvitation() {
                 delay: 0.35,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="relative z-10 mx-4 w-full max-w-sm rounded-[1.75rem] px-7 py-11 text-center"
+              className="relative z-10 mx-2 w-full max-w-sm rounded-[1.75rem] px-7 py-11 text-center"
               style={isArabic ? { fontFamily: arabicFontFamily } : undefined}
             >
-              <p
-                className={`mt-25 mb-4 text-[#F3E5D7] ${
-                  isArabic ? "text-[16px] leading-8" : "text-[14px] leading-snug"
-                }`}
-              >
-                {copy.together}
-              </p>
-
+             <div
+  className={`mt-38 mb-3 text-[#F3E5D7] ${
+    isArabic
+      ? "space-y-1 text-[16px] leading-8"
+      : "text-[14px] leading-snug"
+  }`}
+>
+  {isArabic ? (
+    copy.together.map((line, index) => <p key={index}>{line}</p>)
+  ) : (
+    <p>{copy.together}</p>
+  )}
+</div>
               <h1
                 className="mb-1 text-3xl text-[#F3E5D7] md:text-6xl"
                 style={
@@ -143,7 +154,7 @@ export default function WeddingInvitation() {
                     : { fontFamily: scriptFont }
                 }
               >
-                {isArabic ? "على" : "&"}
+                {isArabic ? "و" : "&"}
               </p>
 
               <h1
@@ -192,7 +203,7 @@ export default function WeddingInvitation() {
          {/* PAGE 2: Countdown with Image Background */}
 <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-4 py-8">
    
-  <div className="absolute inset-0 bg-[#480908]" />
+  <div className="absolute inset-0 bg-[#570f07]" />
 
   <div
     className="relative z-10 w-full"
@@ -209,9 +220,9 @@ export default function WeddingInvitation() {
 {/* PAGE 3: Details */}
 <section
   ref={detailsRef}
-  className="relative flex items-center justify-center overflow-hidden bg-[#480908] px-4 pt-2 pb-6"
+  className="relative flex items-center justify-center overflow-hidden bg-[#570f07] px-4 pt-2 pb-6"
 >
-  <div className="absolute inset-0 bg-[#480908]" />
+  <div className="absolute inset-0 bg-[#570f07]" />
 
   <div
     className="relative z-10 w-full"
@@ -222,20 +233,35 @@ export default function WeddingInvitation() {
 </section>
 
 {/* PAGE 4: Save the Date */}
-<section className="relative overflow-hidden bg-[#480908] px-4 pt-10 pb-10">
-  <div className="absolute inset-0 bg-[#480908]" />
+<section className="relative overflow-hidden bg-[#570f07] px-7 pt-10 pb-10">
+  <div className="absolute inset-0 bg-[#570f07]" />
 
   <div
-    className="relative z-10 flex flex-col items-center"
+    className="relative z-10 mx-auto w-full max-w-sm"
+    style={isArabic ? { fontFamily: arabicFontFamily } : undefined}
   >
-    <Image
-      src="/images/save-date-bg.png"
-      alt=""
-      width={420}
-      height={820}
-      priority={false}
-      className="h-auto w-[92vw] max-w-[420px] object-contain"
-    />
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="w-full overflow-hidden rounded-2xl"
+      style={{
+        background: weddingColors.bgCard,
+        border: "1px solid rgba(247,240,236,0.32)",
+        boxShadow: weddingColors.shadow,
+      }}
+    >
+      <Image
+        src="/images/save-date-bg.png"
+        alt=""
+        width={1254}
+        height={1254}
+        priority={false}
+        className="h-auto w-full object-contain"
+        sizes="(max-width: 640px) 100vw, 384px"
+      />
+    </motion.div>
 
     {/* Text UNDER image */}
     <div className="mt-6 text-center">
