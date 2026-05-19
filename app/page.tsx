@@ -149,7 +149,7 @@ export default function WeddingInvitation() {
                     : { fontFamily: scriptFont }
                 }
               >
-                {isArabic ? "وئام" : "Weaam"}
+                {isArabic ? "وليد" : "Waleed"}
               </h1>
 
               <p
@@ -171,7 +171,7 @@ export default function WeddingInvitation() {
                     : { fontFamily: scriptFont }
                 }
               >
-                {isArabic ? "وليد" : "Waleed"}
+                {isArabic ?"وئام" : "Weaam"}
               </h1>
 
               <p className="mb-2 text-sm text-[#F3E5D7]">
