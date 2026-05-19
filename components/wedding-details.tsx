@@ -247,8 +247,8 @@ export function WeddingDetails({ language = "en" }: WeddingDetailsProps) {
                 icon={<NoCameraIcon />}
                 text={
                   isArabic
-                    ? "نأمل منكم إطفاء الجوالات ومنع التصوير احترامًا لخصوصية الحفل"
-                    : "Please keep phones silent and avoid photography during the ceremony."
+                    ? " يُمنع احضار الجوالات والتصوير"
+                    : "Mobile phones and photography are not allowed"
                 }
               />
             </div>

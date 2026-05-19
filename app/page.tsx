@@ -25,7 +25,7 @@ export default function WeddingInvitation() {
       together: [
         "في ليلةٍ مكبر غلاها فيها الفرح معقود",
        "تتشرف السيدة / منال علي والسيدة / نورية علي",
-        "بدعوتكم لحضور لزفاف نجلينا",
+        "بدعوتكم لحضور زفاف ",
       ],
         byWillOfGod: "وذلك بمشيئة الله",
         venue: "الموقع",
@@ -34,8 +34,14 @@ export default function WeddingInvitation() {
         footerMessage: "لا يسعنا الانتظار للاحتفال معكم",
       }
     : {
-        together:
-          "With sincere affection and love, Mrs. Noura Ali and Mrs. Manal Ali are honored to invite you to attend the engagement ceremony of",
+      together: [
+        "On a night filled",
+        "with joy and cherished moments,",
+        "Mrs. Manal Ali",
+        "and Mrs. Noura Ali",
+        "are honored to invite you",
+        " to the wedding of",
+      ],
         byWillOfGod: "By the will of God",
         venue: "Venue",
         invitationDate: "June 13",
@@ -143,7 +149,7 @@ export default function WeddingInvitation() {
                     : { fontFamily: scriptFont }
                 }
               >
-                {isArabic ? "وليد" : "Waleed"}
+                {isArabic ? "وئام" : "Weaam"}
               </h1>
 
               <p
@@ -165,7 +171,7 @@ export default function WeddingInvitation() {
                     : { fontFamily: scriptFont }
                 }
               >
-                {isArabic ? "وئام" : "Weaam"}
+                {isArabic ? "وليد" : "Waleed"}
               </h1>
 
               <p className="mb-2 text-sm text-[#F3E5D7]">
